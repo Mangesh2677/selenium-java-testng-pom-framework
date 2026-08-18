@@ -46,6 +46,9 @@ public class InventoryPage extends BasePage {
 
     public CartPage openCart() {
         driver.findElement(cartLink).click();
+
+        waitForUrlContains("cart.html");
+
         return new CartPage();
     }
 }

@@ -6,19 +6,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage {
 
-    private final By cartItemNames = By.cssSelector(".inventory_item_name");
+    private final By cartItems = By.cssSelector(".cart_item");
+    private final By cartItemNames =
+            By.cssSelector(".cart_item .inventory_item_name");
+    private final By cartTitle =
+            By.cssSelector(".title");
+
+    public CartPage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cartTitle));
+    }
 
     public boolean isProductPresent(String productName) {
         return driver.findElements(cartItemNames)
                 .stream()
-                .anyMatch(element -> element.getText().equals(productName));
+                .anyMatch(element ->
+                        element.getText().equals(productName));
     }
 
     public int getItemCount() {
-        return driver.findElements(cartItemNames).size();
+        return driver.findElements(cartItems).size();
     }
 
     public void waitForCartItem() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartItemNames));
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(cartItems)
+        );
     }
 }
