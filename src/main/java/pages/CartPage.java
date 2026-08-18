@@ -2,6 +2,7 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage {
@@ -13,14 +14,18 @@ public class CartPage extends BasePage {
             By.cssSelector(".title");
 
     public CartPage() {
+        // Wait for the cart page title and for at least one cart item to be visible
         wait.until(ExpectedConditions.visibilityOfElementLocated(cartTitle));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cartItems));
     }
 
     public boolean isProductPresent(String productName) {
+        String expected = productName == null ? "" : productName.trim();
         return driver.findElements(cartItemNames)
                 .stream()
-                .anyMatch(element ->
-                        element.getText().equals(productName));
+                .map(WebElement::getText)
+                .map(String::trim)
+                .anyMatch(text -> text.equalsIgnoreCase(expected));
     }
 
     public int getItemCount() {
