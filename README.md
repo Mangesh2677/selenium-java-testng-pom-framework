@@ -106,3 +106,29 @@ Add the following to the repository after your first run:
 - A README with architecture and scenarios
 
 This makes the repository look like a real automation project rather than a code dump.
+
+
+
+
+
+## Test Execution Guide
+
+### Prerequisites
+- Java JDK installed
+- Maven installed
+- Git installed
+
+### Running Automation Tests
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run the Maven test command:
+
+   ```bash
+   mvn test
+   ```
+
+### QA Best Practices
+- Execute tests before committing changes.
+- Use meaningful test names.
+- Review changes before creating a commit.
